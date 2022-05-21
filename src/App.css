@@ -1,38 +1,85 @@
-.App {
-  text-align: center;
+:root {
+    --calc-button-width: 75px;
+    --calc-button-height: 70px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.calculator {
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 400px;
+    max-height: 500px;
+    padding: 1px;
+    border: 2px solid #5d4e4e;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.calculator-display {
+    position: relative;
+    background-color: black;
+    width: 100%;
+    min-height: 70px;
+    max-height: 80px;
+    color: white !important;
+    padding: 4px 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.calculator-display .display-type-line {
+
 }
 
-.App-link {
-  color: #61dafb;
+
+.calculator-display .value {
+    font-size: 20px;
+    margin: 0 4px 0 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.calculator-display .last-value {
+    position: absolute;
+    font-size: 25px;
+    margin: 0;
+    bottom: 8px;
+    right: 16px;
+}
+
+.calculator-button {
+    width: var(--calc-button-width);
+    height: var(--calc-button-height);
+    background-color: #757474;
+    border: none;
+    color: white;
+}
+
+.calculator-button.numpad {
+    background-color: #606060;
+}
+
+.calculator-button.bigH {
+    width: calc(var(--calc-button-width) * 2);
+}
+
+.calculator-button.bigV {
+    height: calc(var(--calc-button-height) * 2);
+}
+
+.calculator-button.clear {
+    background-color: #ff0000;
+}
+
+.calculator-button.calc {
+    background-color: #19198c;
+}
+
+/* -------------- */
+
+.vertical {
+    height: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.horizontal {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    align-items: start;
 }
