@@ -81,7 +81,7 @@ function App() {
             if (currentValue === undefined || currentValue === CHAR_NUM_0) {
                 setCurrentValue(char);
             } else {
-                setCurrentValue(currentValue + char);
+                setCurrentValue(currentValue + '' + char);
             }
             return;
         }
