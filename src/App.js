@@ -158,6 +158,9 @@ function App() {
                             i /= Number(value);
                             break;
                         }
+                        default: {
+                            break;
+                        }
                     }
                 }
             }
