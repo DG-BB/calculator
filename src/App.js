@@ -58,6 +58,13 @@ function App() {
             return;
         }
 
+        if (currentValue === CHAR_NUM_0) {
+            if (char === CHAR_MODE_SUB) {
+                setCurrentValue(CHAR_MODE_SUB);
+                return;
+            }
+        }
+
         if (char === CHAR_EQUAL) {
             submitChar(currentValue);
             submitChar(char);
@@ -68,7 +75,11 @@ function App() {
 
         if (isNumberChar(char)) {
 
-            if (isMathChar(currentValue) && isNumberChar(char)) {
+            if (isMathChar(currentValue)) {
+                if (currentValue === CHAR_MODE_SUB && isMathChar(values[values.length - 1])) {
+                    setCurrentValue(currentValue + char);
+                    return;
+                }
                 submitChar(currentValue);
                 setCurrentValue(char);
                 return;
@@ -90,7 +101,9 @@ function App() {
 
             if (currentValue === CHAR_NUM_DOT) return;
 
-            if (isMathChar(currentValue) && isMathChar(char)) {
+            if (currentValue === CHAR_NUM_0 && char !== CHAR_MODE_SUB) return;
+
+            if (isMathChar(currentValue) && currentValue === CHAR_MODE_SUB) {
                 setCurrentValue(char);
                 return;
             }
@@ -171,47 +184,51 @@ function App() {
 
     return (
         <div className="calculator">
+
             <div className="vertical calculator-display">
 
                 <div className="horizontal display-type-line">
                     {values.map((value) => <p key={"NUM" + (Math.random() * 100) + "_" + value}
                                               className="value">{value}</p>)}
-                    <p className="value">{currentValue}</p>
+                    <p id="display" className="value">{currentValue}</p>
                 </div>
                 <p className="last-value">{currentValue}</p>
             </div>
 
             <div>
-                <button onClick={() => resetValues()} className="calculator-button clear bigH">AC</button>
-                <button onClick={() => clickChar('/')} className="calculator-button">/</button>
-                <button onClick={() => clickChar('x')} className="calculator-button">x</button>
+                <button id="clear" onClick={() => resetValues()} className="calculator-button clear bigH">AC</button>
+                <button id="divide" onClick={() => clickChar('/')} className="calculator-button">/</button>
+                <button id="multiply" onClick={() => clickChar('x')} className="calculator-button">x</button>
             </div>
             <div>
-                <button onClick={() => clickChar('7')} className="calculator-button numpad">7</button>
-                <button onClick={() => clickChar('8')} className="calculator-button numpad">8</button>
-                <button onClick={() => clickChar('9')} className="calculator-button numpad">9</button>
-                <button onClick={() => clickChar('-')} className="calculator-button">-</button>
+                <button id="seven" onClick={() => clickChar('7')} className="calculator-button numpad">7</button>
+                <button id="eight" onClick={() => clickChar('8')} className="calculator-button numpad">8</button>
+                <button id="nine" onClick={() => clickChar('9')} className="calculator-button numpad">9</button>
+                <button id="subtract" onClick={() => clickChar('-')} className="calculator-button">-</button>
             </div>
             <div>
-                <button onClick={() => clickChar('4')} className="calculator-button numpad">4</button>
-                <button onClick={() => clickChar('5')} className="calculator-button numpad">5</button>
-                <button onClick={() => clickChar('6')} className="calculator-button numpad">6</button>
-                <button onClick={() => clickChar('+')} className="calculator-button">+</button>
+                <button id="four" onClick={() => clickChar('4')} className="calculator-button numpad">4</button>
+                <button id="five" onClick={() => clickChar('5')} className="calculator-button numpad">5</button>
+                <button id="six" onClick={() => clickChar('6')} className="calculator-button numpad">6</button>
+                <button id="add" onClick={() => clickChar('+')} className="calculator-button">+</button>
             </div>
 
             <div className="horizontal">
                 <div>
                     <div>
-                        <button onClick={() => clickChar('1')} className="calculator-button numpad">1</button>
-                        <button onClick={() => clickChar('2')} className="calculator-button numpad">2</button>
-                        <button onClick={() => clickChar('3')} className="calculator-button numpad">3</button>
+                        <button id="one" onClick={() => clickChar('1')} className="calculator-button numpad">1</button>
+                        <button id="two" onClick={() => clickChar('2')} className="calculator-button numpad">2</button>
+                        <button id="three" onClick={() => clickChar('3')} className="calculator-button numpad">3
+                        </button>
                     </div>
                     <div>
-                        <button onClick={() => clickChar('0')} className="calculator-button numpad bigH">0</button>
-                        <button onClick={() => clickChar('.')} className="calculator-button numpad">.</button>
+                        <button id="zero" onClick={() => clickChar('0')} className="calculator-button numpad bigH">0
+                        </button>
+                        <button id="decimal" onClick={() => clickChar('.')} className="calculator-button numpad">.
+                        </button>
                     </div>
                 </div>
-                <button onClick={() => clickChar('=')} className="calculator-button calc bigV">=</button>
+                <button id="equals" onClick={() => clickChar('=')} className="calculator-button calc bigV">=</button>
             </div>
 
         </div>
